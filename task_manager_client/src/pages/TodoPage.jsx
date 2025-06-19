@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+/**components */
+import TaskManager from "../components/TaskManager";
+
 function Todo(){
    const [count, setCount] = useState(0);
 
@@ -20,19 +23,7 @@ function Todo(){
               </p>
               
               <div className="flex items-center gap-4 my-4">
-                <button
-                  onClick={() => setCount((count) => count - 1)}
-                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
-                >
-                  -
-                </button>
-                <span className="text-xl font-bold">{count}</span>
-                <button
-                  onClick={() => setCount((count) => count + 1)}
-                  className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
-                >
-                  +
-                </button>
+                <TaskManager />
               </div>
 
               <p className="text-gray-500 dark:text-gray-400 mt-4">
