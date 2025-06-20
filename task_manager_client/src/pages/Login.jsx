@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 //
 import Navbar from '../components/Navbar';
 
+//axios routes
+import { userLogin } from '../services/api';
+
 function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
 
@@ -11,10 +14,11 @@ function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Login attempt', form);
     // Future: Call backend/auth API
+    const res = await userLogin();
+    console.log('server res', res.data);
   };
 
   return (
@@ -33,6 +37,7 @@ function Login() {
           value={form.email}
           onChange={handleChange}
           placeholder="Email" 
+          autoComplete="user@email.com"
           className="w-full p-3 mb-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5e3c28]"
           required
         />
@@ -43,6 +48,7 @@ function Login() {
           value={form.password}
           onChange={handleChange}
           placeholder="Password" 
+          autoComplete="new-password"
           className="w-full p-3 mb-6 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5e3c28]"
           required
         />

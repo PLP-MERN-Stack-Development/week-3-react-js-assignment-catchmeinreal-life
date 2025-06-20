@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 //
 import Navbar from '../components/Navbar';
 
+//axios routes
+import { userSignup } from '../services/api';
+
 function Signup() {
   const [form, setForm] = useState({ name: '', email: '', password: '' });
 
@@ -11,10 +14,14 @@ function Signup() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    console.log('Signup attempt', form);
+    
     // Future: Send to backend/signup logic
+    const res = await userSignup();
+    console.log('server up and running::' ,res.data);
+    // console.log('server res', res.data);
+
   };
 
   return (
@@ -33,6 +40,7 @@ function Signup() {
           value={form.name}
           onChange={handleChange}
           placeholder="Name" 
+          autoComplete="user"
           className="w-full p-3 mb-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5e3c28]"
           required
         />
@@ -43,6 +51,7 @@ function Signup() {
           value={form.email}
           onChange={handleChange}
           placeholder="Email" 
+          autoComplete="use@email.com"
           className="w-full p-3 mb-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5e3c28]"
           required
         />
@@ -53,6 +62,7 @@ function Signup() {
           value={form.password}
           onChange={handleChange}
           placeholder="Password" 
+          autoComplete="new-password"
           className="w-full p-3 mb-6 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5e3c28]"
           required
         />
