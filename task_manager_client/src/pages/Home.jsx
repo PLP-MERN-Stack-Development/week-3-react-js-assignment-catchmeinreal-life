@@ -8,10 +8,10 @@ function Home() {
   const navigate = useNavigate();
 
   const HandleClick = () =>{
+    setPending(true);
     setTimeout(() => {
-      setPending(true);
-    }, 1500);
-    navigate('/todos');
+      navigate('/todos');
+    }, 5500); //2.5 sec
   }
 
 
