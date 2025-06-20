@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Navbar from '../components/Navbar';
+
 function Home() {
   const [pending, setPending] = useState(false);
   const navigate = useNavigate();
@@ -16,6 +18,8 @@ function Home() {
 
 
   return (
+    <>
+    <Navbar />
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f6f1e7] to-[#d8b08c] px-4">
       <div className="text-center max-w-md bg-white/80 backdrop-blur-lg p-8 rounded-2xl shadow-xl">
         <h1 className="text-5xl font-extrabold text-[#5e3c28] mb-4">
@@ -34,6 +38,7 @@ function Home() {
         </Link>
       </div>
     </div>
+    </>
   );
 }
 

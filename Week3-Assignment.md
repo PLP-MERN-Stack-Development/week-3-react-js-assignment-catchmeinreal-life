@@ -15,7 +15,7 @@ Build a responsive React application using JSX and Tailwind CSS that demonstrate
 - Create reusable UI components:
   - `Button` component with different variants (primary, secondary, danger)
   - `Card` component for displaying content in a boxed layout
-  - `Navbar` component for site navigation
+  - `Navbar` component for site navigation **
   - `Footer` component with links and copyright information
 - Implement a layout component that includes the Navbar and Footer
 - Use props to make components customizable and reusable
