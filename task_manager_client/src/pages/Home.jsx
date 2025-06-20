@@ -29,13 +29,13 @@ function Home() {
           Plan your day ahead with clarity and intention ☕📋
         </p>
 
-        <Link to="/todos">
+        
           <button 
             disabled={pending}
             onClick={HandleClick} className="bg-[#5e3c28] text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-[#44291c] transition">
             {pending ? 'Getting started....' : 'Get Started'}
           </button>
-        </Link>
+        
       </div>
     </div>
     </>
