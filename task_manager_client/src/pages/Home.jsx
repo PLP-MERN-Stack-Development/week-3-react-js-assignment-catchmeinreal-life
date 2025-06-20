@@ -1,21 +1,20 @@
 
-// function Home() {
-
-//     return(
-//         <div>
-//             <h1>Smart Task Manager</h1>
-//             <p>plan you're day ahead</p>
-
-//             <button>Get started</button>
-//         </div>
-//     );
-// }
-
-// export default Home;
-
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Home() {
+  const [pending, setPending] = useState(false);
+  const navigate = useNavigate();
+
+  const HandleClick = () =>{
+    setTimeout(() => {
+      setPending(true);
+    }, 1500);
+    navigate('/todos');
+  }
+
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f6f1e7] to-[#d8b08c] px-4">
       <div className="text-center max-w-md bg-white/80 backdrop-blur-lg p-8 rounded-2xl shadow-xl">
@@ -27,8 +26,10 @@ function Home() {
         </p>
 
         <Link to="/todos">
-          <button onClick={<Link to='/todos' />} className="bg-[#5e3c28] text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-[#44291c] transition">
-            Get Started
+          <button 
+            disabled={pending}
+            onClick={HandleClick} className="bg-[#5e3c28] text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-[#44291c] transition">
+            {pending ? 'Getting started....' : 'Get Started'}
           </button>
         </Link>
       </div>
