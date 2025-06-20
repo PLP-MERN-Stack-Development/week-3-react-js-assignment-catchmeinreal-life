@@ -2,6 +2,7 @@ import { useState } from "react";
 
 /**components */
 import TaskManager from "../components/TaskManager";
+import Navbar from "../components/Navbar";
 
 function Todo(){
    const [count, setCount] = useState(0);
@@ -9,6 +10,7 @@ function Todo(){
     return (
       <div className="min-h-screen bg-[#f6f1e7] text-[#3b2e2a] dark:bg-[#2e2a24] dark:text-[#f6f1e7]">
         {/* Navbar component will go here */}
+        <Navbar />
         <header className="bg-[#d8b08c] dark:bg-[#5e3c28] shadow">
             <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
               <h1 className="text-3xl font-bold">Mocha Task Manager</h1>
