@@ -12,7 +12,7 @@ function Home() {
   const HandleClick = () =>{
     setPending(true);
     setTimeout(() => {
-      navigate('/todos');
+      navigate('/login');
     }, 5500); //2.5 sec
   }
 

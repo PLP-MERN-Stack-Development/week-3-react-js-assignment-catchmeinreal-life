@@ -14,6 +14,10 @@ import './App.css';  //tailwind css
 import Home from './pages/Home'
 import Todo from './pages/TodoPage'
 import About from './pages/About'
+
+//auth pages
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 // import TaskManager from "./components/TaskManager";
 
 function App() {
@@ -25,7 +29,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/todos' element={<Todo />} />
-        <Route path='/About' element={<About />}/>
+        <Route path='/about' element={<About />}/>
+        <Route path='/login' element={<Login />}/>
+        <Route path='/signup' element={<Signup />}/>
       </Routes>
     </Router>
   );
