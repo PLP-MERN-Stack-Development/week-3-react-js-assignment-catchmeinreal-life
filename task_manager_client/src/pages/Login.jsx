@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+
 /**To redirect a user after login in a React application.
  * */
 
@@ -18,6 +18,7 @@ function Login() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(()=>{
     const validateToken = async () => {
@@ -43,7 +44,6 @@ function Login() {
     validateToken()
   }, []);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
   const handleChange = (e) => {
@@ -101,7 +101,7 @@ function Login() {
           type="submit"
           className="w-full bg-[#5e3c28] text-white p-3 rounded-xl font-semibold hover:bg-[#44291c] transition"
         >
-          Sign In
+          {isLoggedIn? 'Signing in...' : 'Sign in'}
         </button>
 
         <p className="mt-4 text-sm text-center text-gray-700">
