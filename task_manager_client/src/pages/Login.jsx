@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from 'react';
+/**To redirect a user after login in a React application.
+ * */
+
+
+import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 //
@@ -37,6 +43,9 @@ function Login() {
     validateToken()
   }, []);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -46,12 +55,18 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     // Future: Call backend/auth API
-    const res = await userLogin();
-    console.log('server res', res.data);
+    
+    const res = await userLogin(form);
+    if (res) {
+      setIsLoggedIn(true);
+    }
+    
+    console.log('server res', res.status);
   };
 
   return (
     <>
+    {isLoggedIn && <Navigate to='/todos' replace />}
     <Navbar />
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f6f1e7] to-[#d8b08c] px-4">
       <form 

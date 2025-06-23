@@ -6,7 +6,9 @@ const router = express.Router()
 //post request for getting user email
 
 router.post('/login', (req, res) => {
-    console.log('req made ')
+    console.log(req.body)
+
+    
     res.json({message: "yooh wassup you wanna login"});
 })
 
