@@ -1,19 +1,48 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 //
 import Navbar from '../components/Navbar';
 
 //axios routes
-import { userLogin } from '../services/api';
+import { userLogin, validate_Token } from '../services/api';
 
 function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(()=>{
+    const validateToken = async () => {
+      const token = localStorage.getItem('token');
+
+      if (!token) return;  //stop here and dont send validation request
+
+      try {
+        const res = await validate_Token();
+
+        if (res.ok) {
+          setIsLoggedIn(true);
+        } else {
+
+          //token is invalid or expired
+          localStorage.removeItem('token');
+        }
+      } catch (error) {
+        console.error('Error validating token', error)
+      }
+    };
+
+    validateToken()
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     // Future: Call backend/auth API
