@@ -2,18 +2,10 @@ import express from 'express';
 
 const router = express.Router()
 
-import { loginUser } from '../controller/userController.js';
+import { loginUser, registerUser } from '../controller/userController.js';
 //post request for getting user email
 
-router.post('/login', (req, res) => {
-    console.log(req.body)
+router.post('/login', loginUser);
 
-    
-    res.json({message: "yooh wassup you wanna login"});
-})
-
-router.post('/signup', (req, res) => {
-    console.log(req.body);
-    res.json({message: 'received await mongoose'})
-})
+router.post('/signup', registerUser);
 export default router;

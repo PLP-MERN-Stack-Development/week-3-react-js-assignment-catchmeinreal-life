@@ -14,6 +14,7 @@ const loginUser = async (req, res) => {
     
     
     res.status(200).json({ token : genarateToken(user._id), user})
+    
 	
 };
 
@@ -30,6 +31,12 @@ const registerUser = async (req, res) => {
     /**user is regestered
      * 
      * verify email
+     * const user = {
+     //     id: 53768,
+     //     name: "John Doe",
+     //     email: "john.doe@example.com",
+     //     accountNumber: "123456789",
+     // };
      */
 
 
