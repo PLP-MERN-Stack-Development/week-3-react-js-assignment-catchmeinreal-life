@@ -4,6 +4,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config()
 
+import connectDB from './src/config/database.js' 
+
 const app = express();
 
 //middlewar
@@ -15,7 +17,12 @@ import authRoute from './src/routes/user.Auth.Routes.js'
 app.use('/auth', authRoute);
 
 
-app.listen(process.env.PORT, ()=>{
+import userProfile from './src/routes/user.ProfileRoutes.js'
+app.use('/', userProfile);
+
+
+app.listen(process.env.PORT, async ()=>{
+    await connectDB();
     console.log(`server running at port : http://localhost:${process.env.PORT}`)
 })
 
