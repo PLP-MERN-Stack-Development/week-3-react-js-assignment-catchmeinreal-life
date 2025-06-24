@@ -1,10 +1,10 @@
-
 /**To redirect a user after login in a React application.
  * */
 
 
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
+
 import { Link } from 'react-router-dom';
 
 //
@@ -15,8 +15,8 @@ import { userLogin, validate_Token } from '../services/api';
 
 function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
-
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -55,13 +55,23 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     // Future: Call backend/auth API
-    
-    const res = await userLogin(form);
-    if (res) {
+    setLoading(true);
+    setError(null);  //reset error before starting the request
+    try {
+      const res = await userLogin(form);
+      if (!res.ok) {
+        throw new Error('Failed to fetch data')  // handle the  if res.status is not 200
+      }
+
+      const result = await res.json();
+      setData(result)  //server response
       setIsLoggedIn(true);
+      console.log(data);
+      
+    } catch (error) {
+      setError(error.message)
     }
     
-    console.log('server res', res.status);
   };
 
   return (
@@ -75,6 +85,7 @@ function Login() {
       >
         <h2 className="text-3xl font-bold text-center text-[#5e3c28] mb-6">Login</h2>
 
+        <span className=''>{error? 'error occurred': ''}</span>
         <input 
           type="email" 
           name="email"
@@ -101,7 +112,7 @@ function Login() {
           type="submit"
           className="w-full bg-[#5e3c28] text-white p-3 rounded-xl font-semibold hover:bg-[#44291c] transition"
         >
-          {isLoggedIn? 'Signing in...' : 'Sign in'}
+          {loading? 'Signing in...' : 'Sign in'}
         </button>
 
         <p className="mt-4 text-sm text-center text-gray-700">

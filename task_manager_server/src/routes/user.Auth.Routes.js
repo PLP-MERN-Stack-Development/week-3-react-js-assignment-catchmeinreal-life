@@ -2,7 +2,7 @@ import express from 'express';
 
 const router = express.Router()
 
-
+import { loginUser } from '../controller/userController.js';
 //post request for getting user email
 
 router.post('/login', (req, res) => {
