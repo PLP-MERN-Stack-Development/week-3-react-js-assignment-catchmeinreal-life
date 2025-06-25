@@ -6,6 +6,7 @@ import bcrypt from 'bcryptjs';
 const genarateToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d'});
 
 const loginUser = async (req, res) => {
+    console.log(req.body);
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });

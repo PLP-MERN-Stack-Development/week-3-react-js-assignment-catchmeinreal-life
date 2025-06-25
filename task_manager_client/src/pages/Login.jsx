@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 
-import { Link } from 'react-router-dom';
+
 
 //
 import Navbar from '../components/Navbar';
@@ -59,14 +59,18 @@ function Login() {
     setError(null);  //reset error before starting the request
     try {
       const res = await userLogin(form);
-      if (!res.ok) {
-        throw new Error('Failed to fetch data')  // handle the  if res.status is not 200
+      if (!res) {
+        const errorData = await res.json();
+        setLoading(false);
+        setError(errorData.message || 'Failed to fetch data');  // handle the error if
+        throw new Error(errorData.message || 'Failed to fetch data')  // handle the  if res.status is not 200
       }
 
       const result = await res.json();
       setData(result)  //server response
       setIsLoggedIn(true);
-      console.log(data);
+      setLoading(false);
+      console.log(result);
       
     } catch (error) {
       setError(error.message)
@@ -85,7 +89,7 @@ function Login() {
       >
         <h2 className="text-3xl font-bold text-center text-[#5e3c28] mb-6">Login</h2>
 
-        <span className=''>{error? 'error occurred': ''}</span>
+        <span className=''>{error ? error : ''}</span>
         <input 
           type="email" 
           name="email"
