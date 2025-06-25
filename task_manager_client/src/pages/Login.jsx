@@ -54,28 +54,24 @@ function Login() {
   
   const handleLogin = async (e) => {
     e.preventDefault();
-    // Future: Call backend/auth API
     setLoading(true);
-    setError(null);  //reset error before starting the request
+    setError(null);
     try {
       const res = await userLogin(form);
-      if (!res) {
-        const errorData = await res.json();
-        setLoading(false);
-        setError(errorData.message || 'Failed to fetch data');  // handle the error if
-        throw new Error(errorData.message || 'Failed to fetch data')  // handle the  if res.status is not 200
-      }
-
-      const result = await res.json();
-      setData(result)  //server response
+      // Axios returns the response directly, so use res.data
+      setData(res.data); // server response
       setIsLoggedIn(true);
       setLoading(false);
-      console.log(result);
-      
+      console.log(res.data);
     } catch (error) {
-      setError(error.message)
+      // Axios error handling
+      setLoading(false);
+      if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError(error.message || 'Failed to fetch data');
+      }
     }
-    
   };
 
   return (
