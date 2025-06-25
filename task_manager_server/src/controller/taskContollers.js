@@ -42,4 +42,23 @@ function getTasks(req, res) {
         });
 }
 
-export { addTask, getTasks };
+function deleteTask(req, res) {
+    console.log(req.params.id);
+    // Expecting task id in req.body or req.query or req.params
+    // const { id } = req.body; // or req.params.id if you use /task/:id
+    // if (!id) {
+    //     return res.status(400).json({ message: 'Task id is required' });
+    // }
+    // Task.findByIdAndDelete(id)
+    //     .then((deletedTask) => {
+    //         if (!deletedTask) {
+    //             return res.status(404).json({ message: 'Task not found' });
+    //         }
+    //         res.status(200).json({ message: 'Task deleted', task: deletedTask });
+    //     })
+    //     .catch((error) => {
+    //         res.status(500).json({ message: 'Failed to delete task', error: error.message });
+    //     });
+}
+
+export { addTask, getTasks, deleteTask };

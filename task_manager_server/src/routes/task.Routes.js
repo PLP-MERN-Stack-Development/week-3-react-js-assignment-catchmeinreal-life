@@ -1,5 +1,5 @@
 import express from 'express';
-import { addTask, getTasks } from '../controller/taskContollers.js';
+import { addTask, getTasks, deleteTask } from '../controller/taskContollers.js';
 
 import protect from '../middleware/authMiddleware.js';
 
@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post('/tasks', protect, addTask);
 router.get('/tasks', protect, getTasks);
+router.delete('/task/:id',protect, deleteTask);
 
 export default router;
 // This code defines the routes for adding and getting tasks in a task management application.
