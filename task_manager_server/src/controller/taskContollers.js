@@ -9,6 +9,7 @@
 import Task from "../models/Task.js";
 
 function addTask(req, res) {
+    console.log("Adding a new task:", req.body);
     const newTask = new Task(req.body);
     newTask.save()
         .then(() => {

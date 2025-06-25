@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 // import Button from './Button';
 import Button from '../components/Button'
 
+
+import { addToDo } from '../services/api';
+
 /**
  * Custom hook for managing tasks with localStorage persistence
  */
@@ -18,7 +21,7 @@ const useLocalStorageTasks = () => {
   }, [tasks]);
 
   // Add a new task
-  const addTask = (text) => {
+  const addTask = async (text) => {
     if (text.trim()) {
       setTasks([
         ...tasks,
@@ -30,6 +33,9 @@ const useLocalStorageTasks = () => {
         },
       ]);
     }
+
+
+
   };
 
   // Toggle task completion status
@@ -68,6 +74,15 @@ const TaskManager = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addTask(newTaskText);
+    // Call the backend API to add the task
+    addToDo({ text: newTaskText })
+      .then((response) => {
+        console.log('Task added successfully:', response.data);
+      })
+      .catch((error) => {
+        console.error('Error adding task:', error);
+      });
+
     setNewTaskText('');
   };
 
