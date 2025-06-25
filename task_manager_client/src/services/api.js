@@ -19,6 +19,12 @@ export const getTasks = (data) => API.get('/tasks', {
     }
 }, data);
 
+export const deleteTaskapi = (data) => API.delete(`/task/${data}`, {
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+}, data)
+
 export const getUserProfile = () => API.get('/profile', {
     headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`

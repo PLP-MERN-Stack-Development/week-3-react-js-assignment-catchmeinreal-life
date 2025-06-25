@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import Button from './Button';
 import Button from '../components/Button'
 
-import { getTasks } from '../services/api';
+import { getTasks, deleteTaskapi } from '../services/api';
 
 
 import { addToDo } from '../services/api';
@@ -67,8 +67,18 @@ const useLocalStorageTasks = () => {
   };
 
   // Delete a task
-  const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+  const deleteTask = async (id) => {
+    try {
+ 
+      await deleteTaskapi(id); // Call the API to delete the task
+
+
+      
+      console.log('Task deleted successfully'); // Log success message
+      setTasks(tasks.filter((task) => task.id !== id));
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
   };
 
   return { tasks, addTask, toggleTask, deleteTask };
@@ -180,7 +190,7 @@ const TaskManager = () => {
               <Button
                 variant="danger"
                 size="sm"
-                onClick={() => deleteTask(task.id)}
+                onClick={() => deleteTask(task._id)}
                 aria-label="Delete task"
               >
                 Delete
@@ -200,4 +210,4 @@ const TaskManager = () => {
   );
 };
 
-export default TaskManager; 
+export default TaskManager;
