@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 // import Button from './Button';
 import Button from '../components/Button'
 
+import { getTasks } from '../services/api';
+
 
 import { addToDo } from '../services/api';
+import { get, set } from 'mongoose';
 
 /**
  * Custom hook for managing tasks with localStorage persistence
@@ -12,6 +15,22 @@ const useLocalStorageTasks = () => {
   // Initialize state from localStorage or with empty array
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem('tasks');
+
+    getTasks()
+      .then((response) => {
+        // Handle the response from the API
+        console.log('Fetched tasks from API:', response.data);
+
+        // If tasks are fetched successfully, update localStorage
+        localStorage.setItem('tasks', JSON.stringify(response.data.tasks));
+        return response.data;
+      })
+      .catch((error) => {
+        console.error('Error fetching tasks from API:', error);
+        return [];
+      });
+
+    // Parse saved tasks or return an empty array if none exist
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
 
