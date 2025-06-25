@@ -18,7 +18,9 @@ function Signup() {
     e.preventDefault();
     
     // Future: Send to backend/signup logic
-    const res = await userSignup();
+    const res = await userSignup(form);
+
+    console.log('Signup response:', res.data);
     console.log('server up and running::' ,res.data);
     // console.log('server res', res.data);
 
