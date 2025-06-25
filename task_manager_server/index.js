@@ -16,9 +16,12 @@ app.use(express.json());
 import authRoute from './src/routes/user.Auth.Routes.js'
 app.use('/auth', authRoute);
 
-
 import userProfile from './src/routes/user.ProfileRoutes.js'
 app.use('/', userProfile);
+
+// task routes
+import taskRoute from './src/routes/task.Routes.js'
+app.use('/', taskRoute);
 
 
 app.listen(process.env.PORT, async ()=>{
