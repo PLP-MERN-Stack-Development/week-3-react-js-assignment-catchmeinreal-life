@@ -60,6 +60,10 @@ function Login() {
       const res = await userLogin(form);
       // Axios returns the response directly, so use res.data
       setData(res.data); // server response
+
+      // Save token to localStorage
+      localStorage.setItem('token', res.data.token);
+      // Set user as logged in
       setIsLoggedIn(true);
       setLoading(false);
       console.log(res.data);

@@ -13,7 +13,7 @@ function Home() {
     setPending(true);
     setTimeout(() => {
       navigate('/login');
-    }, 5500); //2.5 sec
+    }, 1000); //1 sec
   }
 
 
